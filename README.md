@@ -1,4 +1,3 @@
-# README
 
 **För er som har svårt med att zippa mappar.**
 
