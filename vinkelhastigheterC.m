@@ -1,16 +1,16 @@
 function [omega_styrarm, omega_tak] = vinkelhastigheterC(omega_bakrutan, theta_bakrutan, beta, gamma, L1, L2, L3)
     % Inputs:
-    %   omega_bakrutan  - Angular velocity of the rear window [rad/s]
-    %   theta_bakrutan  - Angular position of the rear window [rad]
-    %   beta            - Current angle of the control arm [rad]
-    %   gamma           - Current angle of the roof [rad]
-    %   L1, L2, L3      - Lengths of the mechanism components [mm]
+    %   omega_bakrutan  - Vinkelhastighet för bakrutan [rad/s]
+    %   theta_bakrutan  - Vinkelposition för bakrutan [rad]
+    %   beta            - Nuvarande vinkel för styrarmen [rad]
+    %   gamma           - Nuvarande vinkel för taket [rad]
+    %   L1, L2, L3      - Längder på mekanismens delar [mm]
     %
     % Outputs:
-    %   omega_styrarm   - Angular velocity of the control arm [rad/s]
-    %   omega_tak       - Angular velocity of the roof [rad/s]
+    %   omega_styrarm   - Vinkelhastighet för styrarmen [rad/s]
+    %   omega_tak       - Vinkelhastighet för taket [rad/s]
     
-    % Jacobian matrix derived from the mechanism geometry
+    % Jacobimatris
     a11 = L2 * sin(beta);
     a12 = -L3 * sin(gamma);
     a21 = -L2 * cos(beta);
@@ -19,15 +19,15 @@ function [omega_styrarm, omega_tak] = vinkelhastigheterC(omega_bakrutan, theta_b
     A = [a11 a12;
          a21 a22];
      
-    % Derivative vector for constraints, driven by the rear window
+    % Deriverad vektor för begränsningar, driven av bakrutan
     b1 = L1 * sin(theta_bakrutan) * omega_bakrutan;
     b2 = -L1 * cos(theta_bakrutan) * omega_bakrutan;
     b = [b1; b2];
     
-    % Solve the linear system A * x = b to find angular velocities
+    % Lös det linjära systemet A * x = b för att hitta vinkelhastigheterna
     x = A \ b;
     
-    % Assign outputs
-    omega_styrarm = x(1); % Angular velocity of the control arm
-    omega_tak = x(2);     % Angular velocity of the roof
+    % Tilldela outputs
+    omega_styrarm = x(1); % Vinkelhastighet för styrarmen
+    omega_tak = x(2);     % Vinkelhastighet för taket
 end
