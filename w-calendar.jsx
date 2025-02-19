@@ -1,4 +1,4 @@
-export const command = `curl -s "https://calendar.google.com/calendar/ical/rasmus.kth%40gmail.com/private-f19ddf4f1973f0f89f4e32ceb4e94e51/basic.ics"`;
+export const command = `curl -s "https://calendar.google.com/calendar/ical/private-f/basic.ics"`;
 
 export const refreshFrequency = 60 * 60 * 1000;
 
